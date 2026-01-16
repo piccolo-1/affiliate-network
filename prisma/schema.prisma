@@ -1,0 +1,205 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User model for both affiliates and managers
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  firstName     String
+  lastName      String
+  company       String?
+  phone         String?
+  skype         String?
+  telegram      String?
+  website       String?
+  role          String    @default("affiliate") // affiliate, manager, admin
+  status        String    @default("pending") // pending, approved, rejected, suspended
+  affiliateId   String?   @unique // Everflow affiliate ID
+  referralCode  String?   @unique
+  referredBy    String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  sentMessages      Message[] @relation("SentMessages")
+  receivedMessages  Message[] @relation("ReceivedMessages")
+  applications      OfferApplication[]
+  assignedOffers    Offer[] @relation("AssignedManager")
+  paymentInfo       PaymentInfo?
+  notifications     Notification[]
+  conversations     ConversationParticipant[]
+}
+
+model PaymentInfo {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  paymentMethod   String   // wire, paypal, crypto, skrill
+  paypalEmail     String?
+  bankName        String?
+  bankAccount     String?
+  bankRouting     String?
+  bankSwift       String?
+  cryptoWallet    String?
+  cryptoType      String?
+  skrillEmail     String?
+  minimumPayout   Float    @default(100)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+// Offer/Campaign model
+model Offer {
+  id                String   @id @default(cuid())
+  name              String
+  description       String
+  shortDescription  String?
+  category          String   // casino, sports-betting, poker, lottery, esports
+  subcategory       String?
+  advertiser        String
+  previewUrl        String?
+  thumbnailUrl      String?
+
+  // Payout info
+  payoutType        String   // CPA, RevShare, Hybrid
+  payoutAmount      Float?   // For CPA
+  revSharePercent   Float?   // For RevShare
+  currency          String   @default("USD")
+
+  // Targeting
+  geoTargets        String   // JSON array of country codes
+  deviceTargets     String?  // JSON array: desktop, mobile, tablet
+  trafficTypes      String?  // JSON array: search, social, email, native, display
+  restrictions      String?  // Text describing restrictions
+
+  // Tracking
+  everflowOfferId   String?  // Everflow offer ID
+  trackingUrl       String?
+
+  // Status
+  status            String   @default("active") // active, paused, expired
+  featured          Boolean  @default(false)
+  exclusive         Boolean  @default(false)
+  requiresApproval  Boolean  @default(true)
+
+  // Stats (cached from Everflow)
+  conversionRate    Float?
+  epc               Float?   // Earnings per click
+
+  // Manager
+  managerId         String?
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  manager           User?    @relation("AssignedManager", fields: [managerId], references: [id])
+  applications      OfferApplication[]
+  creatives         Creative[]
+}
+
+model Creative {
+  id          String   @id @default(cuid())
+  offerId     String
+  name        String
+  type        String   // banner, landing, email, video
+  width       Int?
+  height      Int?
+  fileUrl     String
+  previewUrl  String?
+  language    String   @default("en")
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+
+  offer       Offer    @relation(fields: [offerId], references: [id])
+}
+
+model OfferApplication {
+  id          String   @id @default(cuid())
+  userId      String
+  offerId     String
+  status      String   @default("pending") // pending, approved, rejected
+  notes       String?
+  trackingLink String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id])
+  offer       Offer    @relation(fields: [offerId], references: [id])
+
+  @@unique([userId, offerId])
+}
+
+// Messaging system
+model Conversation {
+  id          String   @id @default(cuid())
+  subject     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  participants ConversationParticipant[]
+  messages     Message[]
+}
+
+model ConversationParticipant {
+  id             String   @id @default(cuid())
+  conversationId String
+  userId         String
+  lastReadAt     DateTime?
+  createdAt      DateTime @default(now())
+
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
+
+  @@unique([conversationId, userId])
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  senderId       String
+  receiverId     String?
+  content        String
+  read           Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  sender         User         @relation("SentMessages", fields: [senderId], references: [id])
+  receiver       User?        @relation("ReceivedMessages", fields: [receiverId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // message, offer_approved, payout, system
+  title     String
+  content   String
+  read      Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+// Stats caching from Everflow
+model DailyStats {
+  id          String   @id @default(cuid())
+  userId      String
+  offerId     String?
+  date        DateTime
+  clicks      Int      @default(0)
+  conversions Int      @default(0)
+  revenue     Float    @default(0)
+  payout      Float    @default(0)
+  createdAt   DateTime @default(now())
+
+  @@unique([userId, offerId, date])
+}
