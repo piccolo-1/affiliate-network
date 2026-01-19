@@ -1,33 +1,33 @@
 {
   "users": [
     {
-      "id": "mkha39ud6psmxvbeyfn",
+      "id": "mklfsupkaxdtddi9kgn",
       "email": "admin@igaming-network.com",
-      "password": "$2a$10$8VrfcAOyTNhd86cnyPTfPeDThPdgWlkgSI9lOQUtavx0zE/fyLTFS",
+      "password": "$2a$10$gVKal0jc4RncHSEGVUKopOfWC9rFZJgSk6DPZm11xw8fkhW4Srrwm",
       "firstName": "Admin",
       "lastName": "User",
       "role": "admin",
       "status": "approved",
-      "createdAt": "2026-01-16T19:35:30.709Z",
-      "updatedAt": "2026-01-16T19:35:30.710Z"
+      "createdAt": "2026-01-19T17:26:26.936Z",
+      "updatedAt": "2026-01-19T17:26:26.937Z"
     },
     {
-      "id": "mkha39wkjnc6u3y0zq",
+      "id": "mklfsurzuy7y635f81q",
       "email": "manager@igaming-network.com",
-      "password": "$2a$10$gtLrU3731VGkyDsbp6B84.ITd6fQG9XNWyNt46Az/uoGNYhSwsrDa",
+      "password": "$2a$10$3jWlSWSuJYyNZRynAnpfMOiWH9nQpmfl6UXjVDijFbq1wgj64Epja",
       "firstName": "John",
       "lastName": "Manager",
       "role": "manager",
       "status": "approved",
       "skype": "john.manager",
       "telegram": "@johnmanager",
-      "createdAt": "2026-01-16T19:35:30.788Z",
-      "updatedAt": "2026-01-16T19:35:30.788Z"
+      "createdAt": "2026-01-19T17:26:27.023Z",
+      "updatedAt": "2026-01-19T17:26:27.023Z"
     },
     {
-      "id": "mkha39yphpi0tmb8m8h",
+      "id": "mklfsuudna7shh8ns5",
       "email": "demo@affiliate.com",
-      "password": "$2a$10$RsZJKac4cEkVSbJ7P8B/P.3.dhU0PSVW3oHIqejesu2wD.WPyNyTe",
+      "password": "$2a$10$ztSgGySA8b9EuBwNYUqqD.avs0RYJjcNsr.S2BjLaCipDUIJhR.H.",
       "firstName": "Demo",
       "lastName": "Affiliate",
       "role": "affiliate",
@@ -36,13 +36,13 @@
       "website": "https://demo-affiliate.com",
       "affiliateId": "AFF-001",
       "referralCode": "DEMO2024",
-      "createdAt": "2026-01-16T19:35:30.865Z",
-      "updatedAt": "2026-01-16T19:35:30.865Z"
+      "createdAt": "2026-01-19T17:26:27.109Z",
+      "updatedAt": "2026-01-19T17:26:27.109Z"
     }
   ],
   "offers": [
     {
-      "id": "mkha39ypx1wur2lke38",
+      "id": "mklfsuud72kerlzbdk4",
       "name": "BetKing Casino",
       "description": "BetKing is a premier online casino offering over 3,000 slot games, live dealer tables, and sports betting. Licensed and regulated with 24/7 customer support. High converting landing pages and dedicated affiliate support.",
       "shortDescription": "Premium online casino with 3000+ games and sports betting",
@@ -63,12 +63,12 @@
       "requiresApproval": true,
       "conversionRate": 4.2,
       "epc": 2.85,
-      "managerId": "mkha39wkjnc6u3y0zq",
-      "createdAt": "2026-01-16T19:35:30.865Z",
-      "updatedAt": "2026-01-16T19:35:30.865Z"
+      "managerId": "mklfsurzuy7y635f81q",
+      "createdAt": "2026-01-19T17:26:27.109Z",
+      "updatedAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39ypu040hddm89a",
+      "id": "mklfsuudyt3359n6bep",
       "name": "SportsBet Pro",
       "description": "Leading sports betting platform with competitive odds on all major sports leagues. Live betting, cash-out features, and mobile app. Strong brand recognition and high player lifetime value.",
       "shortDescription": "Sports betting with live odds on all major leagues",
@@ -89,12 +89,12 @@
       "requiresApproval": true,
       "conversionRate": 3.8,
       "epc": 3.2,
-      "managerId": "mkha39wkjnc6u3y0zq",
-      "createdAt": "2026-01-16T19:35:30.865Z",
-      "updatedAt": "2026-01-16T19:35:30.865Z"
+      "managerId": "mklfsurzuy7y635f81q",
+      "createdAt": "2026-01-19T17:26:27.109Z",
+      "updatedAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39ypfkyemlrprw5",
+      "id": "mklfsuud502gshfi6kr",
       "name": "LuckySpin Slots",
       "description": "Exciting slots-focused casino with progressive jackpots, daily bonuses, and VIP program. Easy registration process and multiple payment options. Great for slot enthusiasts.",
       "shortDescription": "Slots casino with progressive jackpots and daily bonuses",
@@ -116,12 +116,12 @@
       "requiresApproval": true,
       "conversionRate": 5.1,
       "epc": 2.45,
-      "managerId": "mkha39wkjnc6u3y0zq",
-      "createdAt": "2026-01-16T19:35:30.865Z",
-      "updatedAt": "2026-01-16T19:35:30.865Z"
+      "managerId": "mklfsurzuy7y635f81q",
+      "createdAt": "2026-01-19T17:26:27.109Z",
+      "updatedAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yppw7ougesh5m",
+      "id": "mklfsuud8qgcfgaakj3",
       "name": "PokerStars Elite",
       "description": "Premium poker network with tournaments, cash games, and sit-n-go options. Industry-leading software and massive player pool. High-value players with excellent retention.",
       "shortDescription": "Elite poker platform with tournaments and cash games",
@@ -142,12 +142,12 @@
       "requiresApproval": true,
       "conversionRate": 2.9,
       "epc": 4.5,
-      "managerId": "mkha39wkjnc6u3y0zq",
-      "createdAt": "2026-01-16T19:35:30.865Z",
-      "updatedAt": "2026-01-16T19:35:30.865Z"
+      "managerId": "mklfsurzuy7y635f81q",
+      "createdAt": "2026-01-19T17:26:27.109Z",
+      "updatedAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yplfoyv8lmjap",
+      "id": "mklfsuudxjwotn4azl",
       "name": "MegaLotto International",
       "description": "Play international lotteries online including Powerball, EuroMillions, and more. Secure ticket purchasing and automatic prize notifications. High conversion on lottery enthusiasts.",
       "shortDescription": "International lottery tickets online",
@@ -168,12 +168,12 @@
       "requiresApproval": false,
       "conversionRate": 6.2,
       "epc": 1.95,
-      "managerId": "mkha39wkjnc6u3y0zq",
-      "createdAt": "2026-01-16T19:35:30.865Z",
-      "updatedAt": "2026-01-16T19:35:30.865Z"
+      "managerId": "mklfsurzuy7y635f81q",
+      "createdAt": "2026-01-19T17:26:27.109Z",
+      "updatedAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39ypswwgau5frfi",
+      "id": "mklfsuudj9p4gubd04l",
       "name": "ESports Bet Arena",
       "description": "Dedicated esports betting platform covering CS2, Dota 2, League of Legends, Valorant, and more. Live streaming integration and competitive odds. Perfect for gaming audience.",
       "shortDescription": "Esports betting on CS2, Dota 2, LoL, and more",
@@ -194,12 +194,12 @@
       "requiresApproval": true,
       "conversionRate": 4.8,
       "epc": 3.75,
-      "managerId": "mkha39wkjnc6u3y0zq",
-      "createdAt": "2026-01-16T19:35:30.865Z",
-      "updatedAt": "2026-01-16T19:35:30.865Z"
+      "managerId": "mklfsurzuy7y635f81q",
+      "createdAt": "2026-01-19T17:26:27.109Z",
+      "updatedAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yp5oa2wehps37",
+      "id": "mklfsuud98dd2dvz686",
       "name": "Royal Casino VIP",
       "description": "Luxury online casino targeting high rollers with exclusive bonuses, personal account managers, and premium game selection. Higher payouts for quality VIP traffic.",
       "shortDescription": "VIP casino for high rollers with exclusive bonuses",
@@ -220,12 +220,12 @@
       "requiresApproval": true,
       "conversionRate": 1.8,
       "epc": 5.6,
-      "managerId": "mkha39wkjnc6u3y0zq",
-      "createdAt": "2026-01-16T19:35:30.865Z",
-      "updatedAt": "2026-01-16T19:35:30.865Z"
+      "managerId": "mklfsurzuy7y635f81q",
+      "createdAt": "2026-01-19T17:26:27.109Z",
+      "updatedAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yp1vegwkwyba6",
+      "id": "mklfsuudeqce57c38yq",
       "name": "QuickBet Mobile",
       "description": "Mobile-first betting app with quick bet features, instant deposits, and fast withdrawals. Optimized for casual bettors with simple interface. Great for mobile traffic.",
       "shortDescription": "Mobile-first betting app with instant deposits",
@@ -246,9 +246,9 @@
       "requiresApproval": true,
       "conversionRate": 5.5,
       "epc": 2.3,
-      "managerId": "mkha39wkjnc6u3y0zq",
-      "createdAt": "2026-01-16T19:35:30.865Z",
-      "updatedAt": "2026-01-16T19:35:30.865Z"
+      "managerId": "mklfsurzuy7y635f81q",
+      "createdAt": "2026-01-19T17:26:27.109Z",
+      "updatedAt": "2026-01-19T17:26:27.109Z"
     }
   ],
   "applications": [],
@@ -256,304 +256,304 @@
   "messages": [],
   "dailyStats": [
     {
-      "id": "mkha39yp7xam8vmduuw",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-16T19:35:30.865Z",
-      "clicks": 151,
+      "id": "mklfsuudnnuivczslu",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-19T17:26:27.109Z",
+      "clicks": 400,
+      "conversions": 24,
+      "revenue": 2464.09,
+      "payout": 645.98,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudr9v2th11knc",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-18T17:26:27.109Z",
+      "clicks": 441,
+      "conversions": 17,
+      "revenue": 1739.37,
+      "payout": 1534.22,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudrzijf6qt1z",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-17T17:26:27.109Z",
+      "clicks": 508,
+      "conversions": 17,
+      "revenue": 967.4,
+      "payout": 958.76,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuud93kzg1u61cm",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-16T17:26:27.109Z",
+      "clicks": 102,
+      "conversions": 13,
+      "revenue": 2096.8,
+      "payout": 1249.85,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudf2m15lk89kb",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-15T17:26:27.109Z",
+      "clicks": 568,
+      "conversions": 17,
+      "revenue": 1670.64,
+      "payout": 319.5,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudqp444e0cl4",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-14T17:26:27.109Z",
+      "clicks": 158,
+      "conversions": 24,
+      "revenue": 2193.94,
+      "payout": 570.27,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudx3htgqvk2uf",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-13T17:26:27.109Z",
+      "clicks": 159,
+      "conversions": 24,
+      "revenue": 939.94,
+      "payout": 675.45,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudsgfls6ap638",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-12T17:26:27.109Z",
+      "clicks": 593,
+      "conversions": 20,
+      "revenue": 2457.7,
+      "payout": 909.55,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuud9qfg786bd7",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-11T17:26:27.109Z",
+      "clicks": 218,
+      "conversions": 18,
+      "revenue": 1922.8,
+      "payout": 1254.94,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudsn9kszq782",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-10T17:26:27.109Z",
+      "clicks": 491,
       "conversions": 16,
-      "revenue": 1635.98,
-      "payout": 1005.71,
-      "createdAt": "2026-01-16T19:35:30.865Z"
+      "revenue": 2019.77,
+      "payout": 1406.48,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39ypb4fiunfbgkj",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-15T19:35:30.865Z",
-      "clicks": 302,
+      "id": "mklfsuudajya88j8tdu",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-09T17:26:27.109Z",
+      "clicks": 180,
+      "conversions": 17,
+      "revenue": 1192.71,
+      "payout": 928.77,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudfdh6i9kg9n",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-08T17:26:27.109Z",
+      "clicks": 113,
+      "conversions": 5,
+      "revenue": 1657.94,
+      "payout": 1006.09,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudgiprmshdh4c",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-07T17:26:27.109Z",
+      "clicks": 503,
+      "conversions": 20,
+      "revenue": 1989.99,
+      "payout": 924.56,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudqdhe6963dci",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-06T17:26:27.109Z",
+      "clicks": 184,
+      "conversions": 6,
+      "revenue": 2033.21,
+      "payout": 1699.69,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudbn5qe2tinzg",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-05T17:26:27.109Z",
+      "clicks": 230,
       "conversions": 16,
-      "revenue": 1950.58,
-      "payout": 775.32,
-      "createdAt": "2026-01-16T19:35:30.865Z"
+      "revenue": 1238.95,
+      "payout": 827.13,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yp20g1vk66mqh",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-14T19:35:30.865Z",
-      "clicks": 120,
-      "conversions": 7,
-      "revenue": 764.35,
-      "payout": 379.8,
-      "createdAt": "2026-01-16T19:35:30.865Z"
+      "id": "mklfsuudc1khmi0sqas",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-04T17:26:27.109Z",
+      "clicks": 321,
+      "conversions": 12,
+      "revenue": 873.89,
+      "payout": 1339.31,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39ype9n428szuh",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-13T19:35:30.865Z",
+      "id": "mklfsuudnpwlf4e2i2",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-03T17:26:27.109Z",
+      "clicks": 297,
+      "conversions": 15,
+      "revenue": 875.22,
+      "payout": 522.6,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuud7w7p2unls5r",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-02T17:26:27.109Z",
+      "clicks": 138,
+      "conversions": 10,
+      "revenue": 958.58,
+      "payout": 1265.15,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudxm66130n38h",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2026-01-01T17:26:27.109Z",
+      "clicks": 295,
+      "conversions": 11,
+      "revenue": 734.39,
+      "payout": 1252.1,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuud6tayvm6w8b",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-31T17:26:27.109Z",
+      "clicks": 144,
+      "conversions": 14,
+      "revenue": 1857.23,
+      "payout": 677.56,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudifegedq9v6",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-30T17:26:27.109Z",
+      "clicks": 288,
+      "conversions": 8,
+      "revenue": 600.47,
+      "payout": 812.78,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudh1f12re7prj",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-29T17:26:27.109Z",
       "clicks": 133,
       "conversions": 10,
-      "revenue": 1766.9,
-      "payout": 864.87,
-      "createdAt": "2026-01-16T19:35:30.865Z"
+      "revenue": 687.3,
+      "payout": 707.77,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39ypmrik6qfs3df",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-12T19:35:30.865Z",
-      "clicks": 582,
-      "conversions": 20,
-      "revenue": 716.6,
-      "payout": 330.36,
-      "createdAt": "2026-01-16T19:35:30.865Z"
+      "id": "mklfsuud0l0ddmx0o1y",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-28T17:26:27.109Z",
+      "clicks": 300,
+      "conversions": 17,
+      "revenue": 2253.87,
+      "payout": 852.98,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yp7ztyk8y00r",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-11T19:35:30.865Z",
-      "clicks": 498,
-      "conversions": 12,
-      "revenue": 1476.64,
-      "payout": 1257.2,
-      "createdAt": "2026-01-16T19:35:30.865Z"
-    },
-    {
-      "id": "mkha39ypmxat298833n",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-10T19:35:30.865Z",
-      "clicks": 357,
-      "conversions": 15,
-      "revenue": 2441.49,
-      "payout": 1277.62,
-      "createdAt": "2026-01-16T19:35:30.865Z"
-    },
-    {
-      "id": "mkha39ypkxuuoxk97b",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-09T19:35:30.865Z",
-      "clicks": 366,
+      "id": "mklfsuudh6ndumsa1tv",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-27T17:26:27.109Z",
+      "clicks": 580,
       "conversions": 24,
-      "revenue": 1837.95,
-      "payout": 428.98,
-      "createdAt": "2026-01-16T19:35:30.865Z"
+      "revenue": 1742.86,
+      "payout": 1118.96,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yp3ftfbe3n3d6",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-08T19:35:30.865Z",
-      "clicks": 554,
-      "conversions": 17,
-      "revenue": 2232.7,
-      "payout": 1011.52,
-      "createdAt": "2026-01-16T19:35:30.865Z"
-    },
-    {
-      "id": "mkha39ypw0wkotcnu5h",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-07T19:35:30.865Z",
-      "clicks": 169,
-      "conversions": 16,
-      "revenue": 2334.32,
-      "payout": 1579.83,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqm0ootqdcxs",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-06T19:35:30.865Z",
-      "clicks": 402,
-      "conversions": 11,
-      "revenue": 1074.37,
-      "payout": 1218.16,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yq6low1bvjl2f",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-05T19:35:30.865Z",
-      "clicks": 149,
-      "conversions": 17,
-      "revenue": 2396.78,
-      "payout": 957.34,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqrass1b6g2wi",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-04T19:35:30.865Z",
-      "clicks": 317,
-      "conversions": 5,
-      "revenue": 2059.95,
-      "payout": 775.76,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqi0hqxryja",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-03T19:35:30.865Z",
-      "clicks": 412,
-      "conversions": 5,
-      "revenue": 2395.97,
-      "payout": 1429.55,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqs7fnhhshnjj",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-02T19:35:30.865Z",
-      "clicks": 140,
-      "conversions": 6,
-      "revenue": 1585.77,
-      "payout": 389.51,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqxjsmco7y2jl",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2026-01-01T19:35:30.865Z",
-      "clicks": 157,
-      "conversions": 18,
-      "revenue": 631.88,
-      "payout": 533.29,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yq14e7a7yp8bd",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-31T19:35:30.865Z",
-      "clicks": 525,
-      "conversions": 9,
-      "revenue": 1709.05,
-      "payout": 1799.01,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqy9m1bnfvcl",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-30T19:35:30.865Z",
-      "clicks": 323,
-      "conversions": 9,
-      "revenue": 2047.13,
-      "payout": 1401.68,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqmgd8zs4prt",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-29T19:35:30.865Z",
-      "clicks": 170,
-      "conversions": 13,
-      "revenue": 534.12,
-      "payout": 688.98,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqaew67a4mhok",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-28T19:35:30.865Z",
-      "clicks": 197,
+      "id": "mklfsuudky51nc2s9z",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-26T17:26:27.109Z",
+      "clicks": 356,
       "conversions": 7,
-      "revenue": 877.79,
-      "payout": 1416.44,
-      "createdAt": "2026-01-16T19:35:30.866Z"
+      "revenue": 1628.49,
+      "payout": 1556.79,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yqssuemxeljro",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-27T19:35:30.865Z",
-      "clicks": 263,
-      "conversions": 9,
-      "revenue": 1440.11,
-      "payout": 1113.5,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yq6mhfrt77e7l",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-26T19:35:30.865Z",
-      "clicks": 122,
-      "conversions": 18,
-      "revenue": 2331.02,
-      "payout": 1217.57,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqn1q7lqaf08a",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-25T19:35:30.865Z",
-      "clicks": 158,
-      "conversions": 10,
-      "revenue": 1882.88,
-      "payout": 1049.47,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqggv8rb7d3mk",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-24T19:35:30.865Z",
-      "clicks": 528,
-      "conversions": 16,
-      "revenue": 1880.5,
-      "payout": 793.94,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yq2ubhcmfaqjp",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-23T19:35:30.865Z",
-      "clicks": 126,
-      "conversions": 11,
-      "revenue": 986.9,
-      "payout": 750.9,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqpng3drrkycn",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-22T19:35:30.865Z",
-      "clicks": 376,
-      "conversions": 23,
-      "revenue": 1373.8,
-      "payout": 677.64,
-      "createdAt": "2026-01-16T19:35:30.866Z"
-    },
-    {
-      "id": "mkha39yqnm1v1udfy6m",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-21T19:35:30.865Z",
-      "clicks": 175,
+      "id": "mklfsuudlnk4ofms5i",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-25T17:26:27.109Z",
+      "clicks": 301,
       "conversions": 21,
-      "revenue": 1132.43,
-      "payout": 320.36,
-      "createdAt": "2026-01-16T19:35:30.866Z"
+      "revenue": 2469.59,
+      "payout": 368.37,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yq6kd904udnb5",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-20T19:35:30.865Z",
-      "clicks": 208,
-      "conversions": 6,
-      "revenue": 2306.86,
-      "payout": 910.28,
-      "createdAt": "2026-01-16T19:35:30.866Z"
+      "id": "mklfsuudrt8hko5s5ji",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-24T17:26:27.109Z",
+      "clicks": 336,
+      "conversions": 8,
+      "revenue": 2106.83,
+      "payout": 1721.32,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yqz20kezvtls",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-19T19:35:30.865Z",
-      "clicks": 547,
+      "id": "mklfsuud7w963wwtq7m",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-23T17:26:27.109Z",
+      "clicks": 304,
       "conversions": 11,
-      "revenue": 835.42,
-      "payout": 1663.31,
-      "createdAt": "2026-01-16T19:35:30.866Z"
+      "revenue": 710.62,
+      "payout": 444.8,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     },
     {
-      "id": "mkha39yqw1khficaknd",
-      "userId": "mkha39yphpi0tmb8m8h",
-      "date": "2025-12-18T19:35:30.865Z",
-      "clicks": 440,
-      "conversions": 6,
-      "revenue": 1054.3,
-      "payout": 1470.94,
-      "createdAt": "2026-01-16T19:35:30.866Z"
+      "id": "mklfsuud0pvh0yucyk79",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-22T17:26:27.109Z",
+      "clicks": 238,
+      "conversions": 7,
+      "revenue": 1896.66,
+      "payout": 599.81,
+      "createdAt": "2026-01-19T17:26:27.109Z"
+    },
+    {
+      "id": "mklfsuudw29ew9s998",
+      "userId": "mklfsuudna7shh8ns5",
+      "date": "2025-12-21T17:26:27.109Z",
+      "clicks": 508,
+      "conversions": 22,
+      "revenue": 1279.49,
+      "payout": 1372.96,
+      "createdAt": "2026-01-19T17:26:27.109Z"
     }
   ]
 }

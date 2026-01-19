@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
 
 export async function POST(request, { params }) {
@@ -14,15 +14,13 @@ export async function POST(request, { params }) {
     }
 
     const { id } = await params;
-    const body = await request.json();
-    const { notes } = body;
 
     // Check if user is approved
-    const user = await prisma.user.findUnique({
+    const user = db.user.findUnique({
       where: { id: session.id },
     });
 
-    if (user.status !== 'approved') {
+    if (!user || user.status !== 'approved') {
       return NextResponse.json(
         { error: 'Your account must be approved before applying to offers' },
         { status: 403 }
@@ -30,7 +28,7 @@ export async function POST(request, { params }) {
     }
 
     // Check if offer exists
-    const offer = await prisma.offer.findUnique({
+    const offer = db.offer.findUnique({
       where: { id },
     });
 
@@ -42,7 +40,7 @@ export async function POST(request, { params }) {
     }
 
     // Check if already applied
-    const existingApplication = await prisma.offerApplication.findUnique({
+    const existingApplication = db.offerApplication.findUnique({
       where: {
         userId_offerId: {
           userId: session.id,
@@ -59,28 +57,14 @@ export async function POST(request, { params }) {
     }
 
     // Create application
-    const application = await prisma.offerApplication.create({
+    const application = db.offerApplication.create({
       data: {
         userId: session.id,
         offerId: id,
-        notes,
         status: offer.requiresApproval ? 'pending' : 'approved',
-        trackingLink: offer.requiresApproval ? null : generateTrackingLink(user.affiliateId || user.id, offer.id),
+        trackingLink: generateTrackingLink(user.affiliateId || user.id, offer.id),
       },
     });
-
-    // Create notification for manager
-    if (offer.managerId) {
-      await prisma.notification.create({
-        data: {
-          userId: offer.managerId,
-          type: 'application',
-          title: 'New Offer Application',
-          content: `${user.firstName} ${user.lastName} has applied to ${offer.name}`,
-          link: `/manager/applications/${application.id}`,
-        },
-      });
-    }
 
     return NextResponse.json({
       success: true,

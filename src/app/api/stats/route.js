@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
 
 export async function GET(request) {
@@ -14,38 +14,30 @@ export async function GET(request) {
     }
 
     const { searchParams } = new URL(request.url);
-    const range = searchParams.get('range') || '30'; // days
+    const range = searchParams.get('range') || '30';
     const days = parseInt(range);
 
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - days);
-    startDate.setHours(0, 0, 0, 0);
 
-    // Get daily stats
-    const dailyStats = await prisma.dailyStats.findMany({
+    const dailyStats = db.dailyStats.findMany({
       where: {
         userId: session.id,
-        date: {
-          gte: startDate,
-        },
+        date: { gte: startDate.toISOString() },
       },
-      orderBy: {
-        date: 'asc',
-      },
+      orderBy: { date: 'asc' },
     });
 
-    // Calculate totals
     const totals = dailyStats.reduce(
       (acc, day) => ({
-        clicks: acc.clicks + day.clicks,
-        conversions: acc.conversions + day.conversions,
-        revenue: acc.revenue + day.revenue,
-        payout: acc.payout + day.payout,
+        clicks: acc.clicks + (day.clicks || 0),
+        conversions: acc.conversions + (day.conversions || 0),
+        revenue: acc.revenue + (day.revenue || 0),
+        payout: acc.payout + (day.payout || 0),
       }),
       { clicks: 0, conversions: 0, revenue: 0, payout: 0 }
     );
 
-    // Calculate averages
     const avgConversionRate = totals.clicks > 0
       ? ((totals.conversions / totals.clicks) * 100).toFixed(2)
       : 0;
@@ -53,17 +45,13 @@ export async function GET(request) {
       ? (totals.payout / totals.clicks).toFixed(2)
       : 0;
 
-    // Get approved offers count
-    const approvedOffers = await prisma.offerApplication.count({
-      where: {
-        userId: session.id,
-        status: 'approved',
-      },
+    const approvedOffers = db.offerApplication.count({
+      where: { userId: session.id, status: 'approved' },
     });
 
     return NextResponse.json({
       dailyStats: dailyStats.map(day => ({
-        date: day.date.toISOString().split('T')[0],
+        date: day.date.split('T')[0],
         clicks: day.clicks,
         conversions: day.conversions,
         revenue: day.revenue,

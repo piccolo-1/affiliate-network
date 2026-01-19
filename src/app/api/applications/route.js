@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
 
-// Get user's applications
 export async function GET(request) {
   try {
     const session = await getSession();
@@ -14,26 +13,10 @@ export async function GET(request) {
       );
     }
 
-    const applications = await prisma.offerApplication.findMany({
-      where: {
-        userId: session.id,
-      },
-      include: {
-        offer: {
-          select: {
-            id: true,
-            name: true,
-            category: true,
-            payoutType: true,
-            payoutAmount: true,
-            revSharePercent: true,
-            thumbnailUrl: true,
-          },
-        },
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
+    const applications = db.offerApplication.findMany({
+      where: { userId: session.id },
+      include: { offer: true },
+      orderBy: { createdAt: 'desc' },
     });
 
     return NextResponse.json({ applications });

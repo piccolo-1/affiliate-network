@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
 
-// Get conversation messages
 export async function GET(request, { params }) {
   try {
     const session = await getSession();
@@ -16,39 +15,11 @@ export async function GET(request, { params }) {
 
     const { id } = await params;
 
-    const conversation = await prisma.conversation.findUnique({
+    const conversation = db.conversation.findUnique({
       where: { id },
       include: {
-        participants: {
-          include: {
-            user: {
-              select: {
-                id: true,
-                firstName: true,
-                lastName: true,
-                role: true,
-                email: true,
-                skype: true,
-                telegram: true,
-              },
-            },
-          },
-        },
-        messages: {
-          orderBy: {
-            createdAt: 'asc',
-          },
-          include: {
-            sender: {
-              select: {
-                id: true,
-                firstName: true,
-                lastName: true,
-                role: true,
-              },
-            },
-          },
-        },
+        participants: true,
+        messages: true,
       },
     });
 
@@ -59,10 +30,7 @@ export async function GET(request, { params }) {
       );
     }
 
-    // Check if user is participant
-    const isParticipant = conversation.participants.some(
-      (p) => p.userId === session.id
-    );
+    const isParticipant = (conversation.participantIds || []).includes(session.id);
 
     if (!isParticipant) {
       return NextResponse.json(
@@ -71,33 +39,18 @@ export async function GET(request, { params }) {
       );
     }
 
-    // Mark messages as read
-    await prisma.message.updateMany({
+    db.message.updateMany({
       where: {
         conversationId: id,
-        senderId: { not: session.id },
-        read: false,
+        receiverId: session.id,
       },
-      data: {
-        read: true,
-      },
-    });
-
-    // Update last read timestamp
-    await prisma.conversationParticipant.updateMany({
-      where: {
-        conversationId: id,
-        userId: session.id,
-      },
-      data: {
-        lastReadAt: new Date(),
-      },
+      data: { read: true },
     });
 
     return NextResponse.json({
       conversation,
       otherParticipants: conversation.participants
-        .filter((p) => p.userId !== session.id)
+        ?.filter((p) => p.userId !== session.id)
         .map((p) => p.user),
     });
   } catch (error) {

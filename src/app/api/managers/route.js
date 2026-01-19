@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
 
-// Get all managers (for messaging)
 export async function GET(request) {
   try {
     const session = await getSession();
@@ -14,23 +13,22 @@ export async function GET(request) {
       );
     }
 
-    const managers = await prisma.user.findMany({
-      where: {
-        role: { in: ['manager', 'admin'] },
-        status: 'approved',
-      },
-      select: {
-        id: true,
-        firstName: true,
-        lastName: true,
-        email: true,
-        skype: true,
-        telegram: true,
-        role: true,
-      },
-    });
+    const allUsers = db.user.findMany();
+    const managers = allUsers.filter(u =>
+      (u.role === 'manager' || u.role === 'admin') && u.status === 'approved'
+    );
 
-    return NextResponse.json({ managers });
+    return NextResponse.json({
+      managers: managers.map(m => ({
+        id: m.id,
+        firstName: m.firstName,
+        lastName: m.lastName,
+        email: m.email,
+        skype: m.skype,
+        telegram: m.telegram,
+        role: m.role,
+      })),
+    });
   } catch (error) {
     console.error('Get managers error:', error);
     return NextResponse.json(

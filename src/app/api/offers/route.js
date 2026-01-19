@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
 
 export async function GET(request) {
@@ -24,7 +24,6 @@ export async function GET(request) {
       where.OR = [
         { name: { contains: search } },
         { description: { contains: search } },
-        { advertiser: { contains: search } },
       ];
     }
 
@@ -36,27 +35,13 @@ export async function GET(request) {
       where.payoutType = payoutType;
     }
 
-    const [offers, total] = await Promise.all([
-      prisma.offer.findMany({
-        where,
-        orderBy: [
-          { featured: 'desc' },
-          { createdAt: 'desc' },
-        ],
-        skip: (page - 1) * limit,
-        take: limit,
-        include: {
-          manager: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-            },
-          },
-        },
-      }),
-      prisma.offer.count({ where }),
-    ]);
+    const { results: offers, total } = db.offer.findMany({
+      where,
+      orderBy: { featured: 'desc' },
+      skip: (page - 1) * limit,
+      take: limit,
+      include: { manager: true },
+    });
 
     return NextResponse.json({
       offers,

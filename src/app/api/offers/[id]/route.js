@@ -1,26 +1,14 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
 
 export async function GET(request, { params }) {
   try {
     const { id } = await params;
 
-    const offer = await prisma.offer.findUnique({
+    const offer = db.offer.findUnique({
       where: { id },
-      include: {
-        manager: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true,
-            skype: true,
-            telegram: true,
-          },
-        },
-        creatives: true,
-      },
+      include: { manager: true },
     });
 
     if (!offer) {
@@ -35,7 +23,7 @@ export async function GET(request, { params }) {
     let application = null;
 
     if (session) {
-      application = await prisma.offerApplication.findUnique({
+      application = db.offerApplication.findUnique({
         where: {
           userId_offerId: {
             userId: session.id,

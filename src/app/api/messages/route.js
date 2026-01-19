@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
 
-// Get all conversations for user
 export async function GET(request) {
   try {
     const session = await getSession();
@@ -14,59 +13,34 @@ export async function GET(request) {
       );
     }
 
-    const conversations = await prisma.conversation.findMany({
+    const conversations = db.conversation.findMany({
       where: {
-        participants: {
-          some: {
-            userId: session.id,
-          },
-        },
+        participants: { some: { userId: session.id } },
       },
       include: {
-        participants: {
-          include: {
-            user: {
-              select: {
-                id: true,
-                firstName: true,
-                lastName: true,
-                role: true,
-              },
-            },
-          },
-        },
-        messages: {
-          orderBy: {
-            createdAt: 'desc',
-          },
-          take: 1,
-        },
+        participants: true,
+        messages: true,
       },
-      orderBy: {
-        updatedAt: 'desc',
-      },
+      orderBy: { updatedAt: 'desc' },
     });
 
-    // Get unread count for each conversation
-    const conversationsWithUnread = await Promise.all(
-      conversations.map(async (conv) => {
-        const unreadCount = await prisma.message.count({
-          where: {
-            conversationId: conv.id,
-            senderId: { not: session.id },
-            read: false,
-          },
-        });
+    const conversationsWithUnread = conversations.map((conv) => {
+      const unreadCount = db.message.count({
+        where: {
+          conversationId: conv.id,
+          receiverId: session.id,
+          read: false,
+        },
+      });
 
-        return {
-          ...conv,
-          unreadCount,
-          otherParticipants: conv.participants
-            .filter((p) => p.userId !== session.id)
-            .map((p) => p.user),
-        };
-      })
-    );
+      return {
+        ...conv,
+        unreadCount,
+        otherParticipants: conv.participants
+          ?.filter((p) => p.userId !== session.id)
+          .map((p) => p.user),
+      };
+    });
 
     return NextResponse.json({ conversations: conversationsWithUnread });
   } catch (error) {
@@ -78,7 +52,6 @@ export async function GET(request) {
   }
 }
 
-// Create new conversation / Send message
 export async function POST(request) {
   try {
     const session = await getSession();
@@ -93,13 +66,10 @@ export async function POST(request) {
     const body = await request.json();
     const { recipientId, subject, content, conversationId } = body;
 
-    // If conversationId provided, add message to existing conversation
     if (conversationId) {
-      const conversation = await prisma.conversation.findUnique({
+      const conversation = db.conversation.findUnique({
         where: { id: conversationId },
-        include: {
-          participants: true,
-        },
+        include: { participants: true },
       });
 
       if (!conversation) {
@@ -109,19 +79,7 @@ export async function POST(request) {
         );
       }
 
-      // Check if user is participant
-      const isParticipant = conversation.participants.some(
-        (p) => p.userId === session.id
-      );
-
-      if (!isParticipant) {
-        return NextResponse.json(
-          { error: 'Not authorized to post in this conversation' },
-          { status: 403 }
-        );
-      }
-
-      const message = await prisma.message.create({
+      const message = db.message.create({
         data: {
           conversationId,
           senderId: session.id,
@@ -129,33 +87,14 @@ export async function POST(request) {
         },
       });
 
-      // Update conversation timestamp
-      await prisma.conversation.update({
+      db.conversation.update({
         where: { id: conversationId },
-        data: { updatedAt: new Date() },
+        data: { updatedAt: new Date().toISOString() },
       });
-
-      // Create notification for other participants
-      const otherParticipants = conversation.participants.filter(
-        (p) => p.userId !== session.id
-      );
-
-      for (const participant of otherParticipants) {
-        await prisma.notification.create({
-          data: {
-            userId: participant.userId,
-            type: 'message',
-            title: 'New Message',
-            content: `You have a new message in "${conversation.subject}"`,
-            link: `/dashboard/messages/${conversationId}`,
-          },
-        });
-      }
 
       return NextResponse.json({ message });
     }
 
-    // Create new conversation
     if (!recipientId || !subject || !content) {
       return NextResponse.json(
         { error: 'Recipient, subject, and content are required' },
@@ -163,8 +102,7 @@ export async function POST(request) {
       );
     }
 
-    // Check if recipient exists
-    const recipient = await prisma.user.findUnique({
+    const recipient = db.user.findUnique({
       where: { id: recipientId },
     });
 
@@ -175,53 +113,25 @@ export async function POST(request) {
       );
     }
 
-    // Create conversation with message
-    const conversation = await prisma.conversation.create({
+    const conversation = db.conversation.create({
       data: {
         subject,
-        participants: {
-          create: [
-            { userId: session.id },
-            { userId: recipientId },
-          ],
-        },
-        messages: {
-          create: {
-            senderId: session.id,
-            receiverId: recipientId,
-            content,
-          },
-        },
-      },
-      include: {
-        messages: true,
-        participants: {
-          include: {
-            user: {
-              select: {
-                id: true,
-                firstName: true,
-                lastName: true,
-                role: true,
-              },
-            },
-          },
-        },
+        participantIds: [session.id, recipientId],
       },
     });
 
-    // Create notification for recipient
-    await prisma.notification.create({
+    const message = db.message.create({
       data: {
-        userId: recipientId,
-        type: 'message',
-        title: 'New Message',
-        content: `You have a new message: "${subject}"`,
-        link: `/dashboard/messages/${conversation.id}`,
+        conversationId: conversation.id,
+        senderId: session.id,
+        receiverId: recipientId,
+        content,
       },
     });
 
-    return NextResponse.json({ conversation });
+    return NextResponse.json({
+      conversation: { ...conversation, messages: [message] },
+    });
   } catch (error) {
     console.error('Create conversation error:', error);
     return NextResponse.json(

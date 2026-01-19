@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import db from '@/lib/db';
 import { verifyPassword, generateToken, setAuthCookie } from '@/lib/auth';
 
 export async function POST(request) {
@@ -7,7 +7,6 @@ export async function POST(request) {
     const body = await request.json();
     const { email, password } = body;
 
-    // Validate required fields
     if (!email || !password) {
       return NextResponse.json(
         { error: 'Email and password are required' },
@@ -15,8 +14,7 @@ export async function POST(request) {
       );
     }
 
-    // Find user
-    const user = await prisma.user.findUnique({
+    const user = db.user.findUnique({
       where: { email },
     });
 
@@ -27,7 +25,6 @@ export async function POST(request) {
       );
     }
 
-    // Verify password
     const isValid = await verifyPassword(password, user.password);
 
     if (!isValid) {
@@ -37,18 +34,15 @@ export async function POST(request) {
       );
     }
 
-    // Check if account is suspended
     if (user.status === 'suspended') {
       return NextResponse.json(
-        { error: 'Your account has been suspended. Please contact support.' },
+        { error: 'Your account has been suspended' },
         { status: 403 }
       );
     }
 
-    // Generate token
     const token = generateToken(user);
 
-    // Create response
     const response = NextResponse.json({
       success: true,
       user: {
@@ -61,7 +55,6 @@ export async function POST(request) {
       },
     });
 
-    // Set auth cookie
     setAuthCookie(response, token);
 
     return response;

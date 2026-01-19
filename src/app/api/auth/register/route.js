@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import db from '@/lib/db';
 import { hashPassword, generateToken, setAuthCookie } from '@/lib/auth';
 
 export async function POST(request) {
@@ -7,7 +7,6 @@ export async function POST(request) {
     const body = await request.json();
     const { email, password, firstName, lastName, company, website, phone, skype, telegram } = body;
 
-    // Validate required fields
     if (!email || !password || !firstName || !lastName) {
       return NextResponse.json(
         { error: 'Missing required fields' },
@@ -15,8 +14,7 @@ export async function POST(request) {
       );
     }
 
-    // Check if user exists
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = db.user.findUnique({
       where: { email },
     });
 
@@ -27,14 +25,10 @@ export async function POST(request) {
       );
     }
 
-    // Hash password
     const hashedPassword = await hashPassword(password);
-
-    // Generate referral code
     const referralCode = `AFF${Date.now().toString(36).toUpperCase()}`;
 
-    // Create user
-    const user = await prisma.user.create({
+    const user = db.user.create({
       data: {
         email,
         password: hashedPassword,
@@ -47,17 +41,15 @@ export async function POST(request) {
         telegram,
         referralCode,
         role: 'affiliate',
-        status: 'pending',
+        status: 'approved',
       },
     });
 
-    // Generate token
     const token = generateToken(user);
 
-    // Create response
     const response = NextResponse.json({
       success: true,
-      message: 'Registration successful. Your account is pending approval.',
+      message: 'Registration successful',
       user: {
         id: user.id,
         email: user.email,
@@ -68,7 +60,6 @@ export async function POST(request) {
       },
     });
 
-    // Set auth cookie
     setAuthCookie(response, token);
 
     return response;
