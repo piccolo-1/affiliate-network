@@ -10,7 +10,8 @@ import {
   Target,
   Gift,
   ArrowRight,
-  Calendar
+  Calendar,
+  MessageSquare
 } from 'lucide-react';
 import {
   LineChart,
@@ -385,6 +386,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-// Import MessageSquare for quick actions
-import { MessageSquare } from 'lucide-react';

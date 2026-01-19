@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
+import everflow from '@/lib/everflow';
 
 export async function POST(request, { params }) {
   try {
@@ -56,13 +57,17 @@ export async function POST(request, { params }) {
       );
     }
 
+    // Generate tracking link using Everflow integration
+    const affiliateId = user.affiliateId || user.id;
+    const trackingLink = await generateTrackingLink(affiliateId, offer);
+
     // Create application
     const application = db.offerApplication.create({
       data: {
         userId: session.id,
         offerId: id,
         status: offer.requiresApproval ? 'pending' : 'approved',
-        trackingLink: generateTrackingLink(user.affiliateId || user.id, offer.id),
+        trackingLink: trackingLink,
       },
     });
 
@@ -82,7 +87,21 @@ export async function POST(request, { params }) {
   }
 }
 
-function generateTrackingLink(affiliateId, offerId) {
+async function generateTrackingLink(affiliateId, offer) {
+  const hasEverflowConfig = process.env.EVERFLOW_API_KEY &&
+    process.env.EVERFLOW_API_KEY !== 'demo-api-key';
+
+  // If Everflow is configured, use Everflow tracking
+  if (hasEverflowConfig && offer.everflowOfferId) {
+    try {
+      return await everflow.generateTrackingLink(affiliateId, offer.everflowOfferId);
+    } catch (error) {
+      console.error('Everflow tracking link generation failed:', error);
+      // Fall back to local tracking
+    }
+  }
+
+  // Fallback to local tracking URL
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-  return `${baseUrl}/track?aff=${affiliateId}&offer=${offerId}`;
+  return `${baseUrl}/track?aff=${affiliateId}&offer=${offer.id}`;
 }

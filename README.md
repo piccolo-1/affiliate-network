@@ -15,53 +15,49 @@ A modern affiliate marketing network platform focused on iGaming (casino, sports
 
 - **Frontend**: Next.js 14, React 18, Tailwind CSS
 - **Backend**: Next.js API Routes
-- **Database**: SQLite with Prisma ORM
+- **Database**: JSON file-based (zero setup required)
 - **Charts**: Recharts
 - **Icons**: Lucide React
 - **Authentication**: JWT with HTTP-only cookies
 
-## Getting Started
+## Quick Start
 
-### Prerequisites
+### One-Command Setup
 
-- Node.js 18+
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd affiliate-network
+node start.js
 ```
 
-2. Install dependencies:
+This will install dependencies, seed the database, and start the server.
+
+### Manual Setup
+
+1. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Set up the database:
+2. Seed the database (optional - creates demo data):
 ```bash
-npm run db:push
-npm run db:seed
+npm run seed
 ```
 
-4. Start the development server:
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Demo Accounts
 
-After running the seed script, you can log in with these demo accounts:
+The seeded database includes these demo accounts:
 
 | Role | Email | Password |
 |------|-------|----------|
-| Admin | admin@igaming-network.com | admin123 |
-| Manager | manager@igaming-network.com | manager123 |
-| Affiliate | demo@affiliate.com | demo123 |
+| Affiliate | affiliate@demo.com | password123 |
+| Manager | manager@demo.com | password123 |
+| Admin | admin@demo.com | password123 |
 
 ## Project Structure
 
@@ -72,20 +68,23 @@ src/
 │   │   ├── auth/          # Authentication endpoints
 │   │   ├── offers/        # Offer management
 │   │   ├── messages/      # Messaging system
-│   │   └── stats/         # Statistics & analytics
+│   │   ├── stats/         # Statistics & analytics
+│   │   └── postback/      # Conversion tracking
+│   ├── track/             # Click tracking endpoint
 │   ├── dashboard/         # Affiliate dashboard pages
 │   ├── offers/            # Public offer marketplace
 │   ├── login/             # Login page
 │   └── register/          # Registration page
 ├── lib/                   # Utility functions
 │   ├── auth.js           # Authentication helpers
-│   ├── db.js             # Database client
+│   ├── db.js             # JSON database client
 │   └── everflow.js       # Everflow API integration
-└── components/           # Reusable components
 
-prisma/
-├── schema.prisma         # Database schema
-└── seed.js              # Database seeding script
+data/
+└── db.json               # Database file (auto-created)
+
+scripts/
+└── seed.js               # Database seeding script
 ```
 
 ## Everflow Integration
@@ -98,11 +97,18 @@ EVERFLOW_NETWORK_ID=your-network-id
 EVERFLOW_API_URL=https://api.eflow.team/v1
 ```
 
-### Features:
-- Affiliate tracking link generation
-- Click and conversion tracking
+### Tracking Features:
+- **Click Tracking**: `/track?aff={affiliateId}&offer={offerId}`
+- **Conversion Postback**: `/api/postback?aff={affiliateId}&offer={offerId}&payout={amount}`
 - Real-time stats and reporting
-- Postback URL configuration
+- Automatic fallback to local tracking when Everflow is not configured
+
+### Postback URL Format
+
+Configure this postback URL on your advertiser side:
+```
+https://yourdomain.com/api/postback?aff={affiliate_id}&offer={offer_id}&payout={payout}&txn={transaction_id}
+```
 
 ## API Endpoints
 
@@ -125,16 +131,19 @@ EVERFLOW_API_URL=https://api.eflow.team/v1
 ### Stats
 - `GET /api/stats` - Get performance statistics
 
+### Tracking
+- `GET /track` - Click tracking redirect
+- `GET /api/postback` - Conversion postback (GET or POST)
+
 ## Environment Variables
 
-```env
-# Database
-DATABASE_URL="file:./dev.db"
+Create a `.env` file in the root directory:
 
+```env
 # JWT Secret (change in production!)
 JWT_SECRET="your-secret-key"
 
-# Everflow API
+# Everflow API (optional - falls back to local tracking)
 EVERFLOW_API_KEY="your-api-key"
 EVERFLOW_NETWORK_ID="your-network-id"
 EVERFLOW_API_URL="https://api.eflow.team/v1"
@@ -156,8 +165,8 @@ npm start
 ```
 
 For production deployment, consider:
-- Using PostgreSQL instead of SQLite
 - Setting up proper environment variables
+- Using a persistent storage solution for the JSON database
 - Configuring a reverse proxy (nginx)
 - Setting up SSL certificates
 
