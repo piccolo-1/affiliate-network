@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -15,13 +13,13 @@ if (!fs.existsSync('node_modules')) {
   console.log('Step 1: Installing dependencies...');
   try {
     execSync('npm install', { stdio: 'inherit' });
-    console.log('✓ Dependencies installed\n');
+    console.log('[OK] Dependencies installed\n');
   } catch (e) {
     console.error('Error installing dependencies');
     process.exit(1);
   }
 } else {
-  console.log('Step 1: Dependencies already installed ✓\n');
+  console.log('Step 1: Dependencies already installed [OK]\n');
 }
 
 // Step 2: Create database with demo data
@@ -39,14 +37,12 @@ function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
 
-const adminPassword = bcrypt.hashSync('admin123', 10);
-const managerPassword = bcrypt.hashSync('manager123', 10);
-const affiliatePassword = bcrypt.hashSync('demo123', 10);
+const password = bcrypt.hashSync('password123', 10);
 
 const manager = {
   id: generateId(),
-  email: 'manager@igaming-network.com',
-  password: managerPassword,
+  email: 'manager@demo.com',
+  password: password,
   firstName: 'John',
   lastName: 'Manager',
   role: 'manager',
@@ -59,8 +55,8 @@ const manager = {
 
 const affiliate = {
   id: generateId(),
-  email: 'demo@affiliate.com',
-  password: affiliatePassword,
+  email: 'affiliate@demo.com',
+  password: password,
   firstName: 'Demo',
   lastName: 'Affiliate',
   role: 'affiliate',
@@ -72,7 +68,7 @@ const affiliate = {
 };
 
 const users = [
-  { id: generateId(), email: 'admin@igaming-network.com', password: adminPassword, firstName: 'Admin', lastName: 'User', role: 'admin', status: 'approved', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+  { id: generateId(), email: 'admin@demo.com', password: password, firstName: 'Admin', lastName: 'User', role: 'admin', status: 'approved', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
   manager,
   affiliate,
 ];
@@ -103,7 +99,7 @@ for (let i = 0; i < 30; i++) {
 
 const db = { users, offers, applications: [], conversations: [], messages: [], dailyStats };
 fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
-console.log('✓ Database created with demo data\n');
+console.log('[OK] Database created with demo data\n');
 
 // Step 3: Start server
 console.log('Step 3: Starting server...\n');
@@ -113,8 +109,8 @@ console.log('  Website starting at:');
 console.log('  http://localhost:3000');
 console.log('');
 console.log('  Login with:');
-console.log('  Email: demo@affiliate.com');
-console.log('  Password: demo123');
+console.log('  Email: affiliate@demo.com');
+console.log('  Password: password123');
 console.log('');
 console.log('========================================');
 console.log('');
